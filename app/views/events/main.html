@@ -27,6 +27,9 @@
       <p>
         {{event.data.description}}
       </p>
+      <p ng-if="event.data.venue">
+        Venue: <span>{{event.data.venue.city || 'N/A'}}</span>, <span>{{event.data.venue.country || ''}}</span>, <span>{{event.data.venue.zip || ''}}</span><span ng-if="event.data.venue.latitude && event.data.venue.longitude">,&nbsp;<a ng-href="http://maps.google.com/maps?q={{event.data.venue.latitude}},{{event.data.venue.longitude}}" target="_blank">Go to map</a></span>
+      </p>
       <p ng-if="event.data.start_time">
         Start Time - {{event.data.start_time | date: 'medium'}}
       </p>
@@ -39,7 +42,7 @@
 
   <md-content style="margin-top:10px; padding: 0px;" ng-if="event.data" class="md-whiteframe-z1" layout="column" flex>
     <md-tabs md-border-bottom class="md-primary" flex>
-      <md-tab label="Attending">
+      <md-tab label="Going">
         <md-content class="md-padding" layout="column" flex>
           <md-list flex>
             <md-list-item class="md-2-line fb-user-item" ng-repeat="attending in event.data.attending" ng-click="showProfile(attending.id)"  md-ink-ripple>
@@ -51,7 +54,7 @@
           </md-list>
         </md-content>
       </md-tab>
-      <md-tab label="Maybe">
+      <md-tab label="Maybe Going">
         <md-content class="md-padding">
           <md-list flex>
             <md-list-item class="md-2-line fb-user-item" ng-repeat="maybe in event.data.maybe" ng-click="showProfile(maybe.id)" md-ink-ripple>

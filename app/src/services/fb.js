@@ -19,6 +19,7 @@
       var params = [];
 
       params.push('name');
+      params.push('venue');
       params.push('description');
       params.push('start_time');
       params.push('end_time');
