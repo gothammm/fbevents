@@ -1,0 +1,72 @@
+.fb-app-loading {
+  position: fixed;
+}
+.fb-app-loading .container {
+  background-color: #2196F3;
+  color: #fff;
+  bottom: 0px;
+  left: 0px;
+  height: 100%;
+  opacity: 1.0;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  z-index: 999999;
+  -webkit-transition: opacity 200ms linear;
+  -moz-transition: opacity 200ms linear;
+  transition: opacity 200ms linear;
+}
+.fb-app-loading .container .load-message {
+  width: 60%;
+  top: 40%;
+  position: relative;
+  margin: auto;
+}
+.fb-app-loading .container .load-message md-progress-circular {
+  float: left;
+}
+.fb-app-loading .container .load-message h1 {
+  text-align: center;
+  top: 40%;
+  position: relative;
+}
+
+.fb-main {
+  background: #2196F3;
+  background: #2196F3;
+}
+
+.fb-center {
+  -webkit-align-self: center;
+  -moz-align-self: center;
+  align-self: center;
+  -ms-flex-item-align: center;
+}
+
+.md-button.fb-search-icon {
+  margin: 10px auto;
+  font-size: 24px;
+}
+
+.fb-event-details img {
+  height: 200px;
+}
+
+md-list-item.user-item {
+  float: left;
+  width: 25%;
+}
+
+.fb-user-item {
+  box-sizing: border-box;
+  float: left;
+  cursor: pointer;
+  width: 33%;
+}
+.fb-user-item .fb-user-name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/*# sourceMappingURL=app.css.map */

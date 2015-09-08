@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>FB Events</title>
+
+  <!-- bower:css -->
+  <link rel="stylesheet" href="lib/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="lib/mdi/css/materialdesignicons.css" />
+  <link rel="stylesheet" href="lib/mdi/css/materialdesignicons.min.css" />
+  <!-- endbower -->
+
+  <!-- injector:css -->
+  <link rel="stylesheet" href="styles/app.css">
+  <!-- endinjector -->
+  
+  <!-- bower:js -->
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular-animate/angular-animate.js"></script>
+  <script src="lib/angular-cache/dist/angular-cache.js"></script>
+  <script src="lib/angular-aria/angular-aria.js"></script>
+  <script src="lib/angular-material/angular-material.js"></script>
+  <script src="lib/angular-messages/angular-messages.js"></script>
+  <script src="lib/moment/moment.js"></script>
+  <script src="lib/angular-moment/angular-moment.js"></script>
+  <script src="lib/angular-resource/angular-resource.js"></script>
+  <script src="lib/angular-route/angular-route.js"></script>
+  <script src="lib/angular-facebook/lib/angular-facebook.js"></script>
+  <!-- endbower -->
+
+  <!-- injector:js -->
+  <script src="src/_app.js"></script>
+  <script src="src/modules/events/_events.js"></script>
+  <script src="src/modules/events/events.controller.js"></script>
+  <script src="src/modules/events/events.route.js"></script>
+  <script src="src/services/_service.js"></script>
+  <script src="src/services/fb.js"></script>
+  <script src="src/services/service.config.js"></script>
+  <!-- endinjector -->
+</head>
+<body layout="column" ng-app="fbevents"> 
+  <div class="fb-app-loading" ng-animate-children>
+     <div class="container">
+      <div class="load-message">
+        <h1>Loading App..</h1>
+      </div>
+    </div>
+  </div>
+  <md-content layout flex ng-view class="fb-main-container">
+  </md-content>
+</body>
+</html>

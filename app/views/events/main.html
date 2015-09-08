@@ -1,0 +1,80 @@
+<md-content layout-padding class="fb-main" layout="column" flex>
+
+  <md-content layout-padding layout="column">
+    <md-progress-linear md-mode="indeterminate" ng-if="isSearching"></md-progress-linear>
+    <form name="eventSearch" novalidate layout="row" ng-submit="getEvent()" flex>
+      <md-input-container style="width:95%">
+        <label>Event Url</label>
+        <input ng-disabled="isSearching" type="text" ng-model="event.url" name="eventUrl" 
+        ng-pattern="/(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/" 
+        required>
+        <div ng-messages="eventSearch.eventUrl.$error">
+          <div ng-message="required">This is required.</div>
+          <div ng-message="pattern">Invalid URL.</div>
+          <div ng-message="server_error">{{error.server}}</div>
+        </div>
+      </md-input-container>
+      <md-button ng-disabled="isSearching || eventSearch.$invalid" class="fb-search-icon md-icon-button" aria-label="Search">
+        <md-icon md-font-icon="mdi mdi-magnify"></md-icon>
+      </md-button>
+    </form>
+  </md-content>
+
+  <!-- Card title and description -->
+  <md-card ng-if="event.data">
+    <md-card-content>
+      <h2 class="md-title">{{event.data.name}}</h2>
+      <p>
+        {{event.data.description}}
+      </p>
+      <p ng-if="event.data.start_time">
+        Start Time - {{event.data.start_time | date: 'medium'}}
+      </p>
+      <p ng-if="event.data.end_time">
+        End Time - {{event.data.end_time | date: 'medium'}}
+      </p>
+    </md-card-content>
+  </md-card>
+  <!-- <md-content layout-padding class="md-whiteframe-z1" style="margin-top:10px; padding: 0px;" layout="column" flex ng-if="false"></md-content> -->
+
+  <md-content style="margin-top:10px; padding: 0px;" ng-if="event.data" class="md-whiteframe-z1" layout="column" flex>
+    <md-tabs md-border-bottom class="md-primary" flex>
+      <md-tab label="Attending">
+        <md-content class="md-padding" layout="column" flex>
+          <md-list flex>
+            <md-list-item class="md-2-line fb-user-item" ng-repeat="attending in event.data.attending" ng-click="showProfile(attending.id)"  md-ink-ripple>
+              <img ng-src="{{attending.picture.data.url}}" class="md-avatar" alt="{{attending.name}}" />
+              <div class="md-list-item-text compact">
+                <h4 class="fb-user-name">{{attending.name}}</h4>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-content>
+      </md-tab>
+      <md-tab label="Maybe">
+        <md-content class="md-padding">
+          <md-list flex>
+            <md-list-item class="md-2-line fb-user-item" ng-repeat="maybe in event.data.maybe" ng-click="showProfile(maybe.id)" md-ink-ripple>
+              <img ng-src="{{maybe.picture.data.url}}" class="md-avatar" alt="{{maybe.name}}" />
+              <div class="md-list-item-text compact">
+                <h4 class="fb-user-name">{{maybe.name}}</h4>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-content>
+      </md-tab>
+      <md-tab label="Declined">
+        <md-content class="md-padding">
+          <md-list flex>
+            <md-list-item class="md-2-line fb-user-item" ng-repeat="declined in event.data.declined" ng-click="showProfile(declined.id)" md-ink-ripple>
+              <img ng-src="{{declined.picture.data.url}}" class="md-avatar" alt="{{declined.name}}" />
+              <div class="md-list-item-text compact">
+                <h4 class="fb-user-name">{{declined.name}}</h4>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</md-content>

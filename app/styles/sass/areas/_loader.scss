@@ -1,0 +1,30 @@
+.fb-app-loading {
+  position: fixed ;
+  .container {
+    background-color: $rp-blue;
+    color: #fff;
+    bottom: 0px;
+    left: 0px;
+    height: 100%;
+    opacity: 1.0;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    z-index: 999999;
+    @include transition(opacity 200ms linear);
+    .load-message {
+      width: 60%;
+      top: 40%;
+      position: relative;
+      margin: auto;
+      md-progress-circular {
+        float: left;
+      }
+      h1 {
+        text-align: center;
+        top: 40%;
+        position: relative;
+      }
+    }
+  }
+}

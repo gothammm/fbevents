@@ -1,0 +1,37 @@
+
+
+.fb-main {
+  @include background($rp-blue);
+}
+
+.fb-center {
+  @include align-self(center);
+}
+
+.md-button.fb-search-icon {
+  margin: 10px auto;
+  font-size: 24px;
+}
+
+.fb-event-details {
+  img {
+    height: 200px;
+  }
+}
+
+md-list-item.user-item {
+  float: left;
+  width: 25%;
+}
+
+.fb-user-item {
+  box-sizing: border-box;
+  float: left;
+  cursor: pointer;
+  width: 33%;
+  .fb-user-name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
