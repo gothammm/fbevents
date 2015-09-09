@@ -45,37 +45,40 @@
       <md-tab label="Going">
         <md-content class="md-padding" layout="column" flex>
           <md-list flex>
-            <md-list-item class="md-2-line fb-user-item" ng-repeat="attending in event.data.attending" ng-click="showProfile(attending.id)"  md-ink-ripple>
+            <md-list-item class="md-2-line fb-user-item" ng-repeat="attending in event.attending.data track by attending.id" ng-click="showProfile(attending.id)"  md-ink-ripple>
               <img ng-src="{{attending.picture.data.url}}" class="md-avatar" alt="{{attending.name}}" />
               <div class="md-list-item-text compact">
                 <h4 class="fb-user-name">{{attending.name}}</h4>
               </div>
             </md-list-item>
           </md-list>
+          <md-button class="md-raised md-primary" ng-if="event.attending.paging.next" ng-click="getMore('attending',event.attending.paging.next)">Load More</md-button>
         </md-content>
       </md-tab>
       <md-tab label="Maybe Going">
-        <md-content class="md-padding">
+        <md-content class="md-padding" layout="column" flex>
           <md-list flex>
-            <md-list-item class="md-2-line fb-user-item" ng-repeat="maybe in event.data.maybe" ng-click="showProfile(maybe.id)" md-ink-ripple>
+            <md-list-item class="md-2-line fb-user-item" ng-repeat="maybe in event.maybe.data track by maybe.id" ng-click="showProfile(maybe.id)" md-ink-ripple>
               <img ng-src="{{maybe.picture.data.url}}" class="md-avatar" alt="{{maybe.name}}" />
               <div class="md-list-item-text compact">
                 <h4 class="fb-user-name">{{maybe.name}}</h4>
               </div>
             </md-list-item>
           </md-list>
+          <md-button class="md-raised md-primary" ng-if="event.maybe.paging.next" ng-click="getMore('maybe',event.maybe.paging.next)">Load More</md-button>
         </md-content>
       </md-tab>
       <md-tab label="Declined">
-        <md-content class="md-padding">
+        <md-content class="md-padding" layout="column" flex>
           <md-list flex>
-            <md-list-item class="md-2-line fb-user-item" ng-repeat="declined in event.data.declined" ng-click="showProfile(declined.id)" md-ink-ripple>
+            <md-list-item class="md-2-line fb-user-item" ng-repeat="declined in event.declined.data track by declined.id" ng-click="showProfile(declined.id)" md-ink-ripple>
               <img ng-src="{{declined.picture.data.url}}" class="md-avatar" alt="{{declined.name}}" />
               <div class="md-list-item-text compact">
                 <h4 class="fb-user-name">{{declined.name}}</h4>
               </div>
             </md-list-item>
           </md-list>
+          <md-button class="md-raised md-primary" ng-if="event.declined.paging.next" ng-click="getMore('declined',event.declined.paging.next)">Load More</md-button>
         </md-content>
       </md-tab>
     </md-tabs>

@@ -18,6 +18,9 @@
         scope.isSearching = false;
         if(response) {
           scope.event.data = response;
+          scope.event.attending = response.attending;
+          scope.event.maybe = response.maybe;
+          scope.event.declined = response.declined;
         } else {
           console.log(response);
         }
@@ -34,6 +37,20 @@
       }
     }
 
+    scope.getMore = function(type, url) {
+      eventsService
+      .getMore(url)
+      .then(function(response) {
+        var data = response.data;
+        if(data && data.data) {
+          scope.event[type].data = scope.event[type].data.concat(data.data);
+          scope.event[type].paging = data.paging;
+        } 
+      })
+      .catch(function(response) {
+        console.log(response);
+      })
+    }
 
     function parseUri(uri) {
       var parser = document.createElement('a');
@@ -47,7 +64,10 @@
     function init() {
       scope.event = {
         url: '',
-        data: null
+        data: null,
+        attending: null,
+        maybe: null,
+        declined: null
       };
       scope.isSearching = false;
     }

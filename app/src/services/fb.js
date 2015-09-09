@@ -1,18 +1,18 @@
 (function(angular) {
 
 
-  EventsService.$inject = ['Facebook', 'fbAccessToken', '$q'];
+  EventsService.$inject = ['Facebook', 'fbAccessToken', '$q', '$http'];
 
   angular
     .module('fbevents.services')
     .service('EventsService', EventsService);
 
-  function EventsService(fb, fbToken, q) {
+  function EventsService(fb, fbToken, q, req) {
 
 
     function getStatusQuery(type) {
       if(!type) return null;
-      return type + ".limit(12){name,id,picture{url}}"
+      return type + ".limit(50){name,id,picture{url}}"
     }
 
     function buildRequestParams() {
@@ -31,6 +31,10 @@
     }
 
 
+    this.getMore = function(nxtUrl) {
+      if(!nxtUrl) return q.reject('Invalid request');
+      return req.get(nxtUrl);
+    }
 
     this.getDetails = function(eventId) {
       if(!eventId) return q.reject('Invalid event ID');
@@ -39,12 +43,7 @@
 
       fb.api('/'+ eventId + '?' + buildRequestParams() + '&access_token=' + fbToken, function(response) {
         if(response && !response.error) {
-          var obj =  {
-            attending: response.attending.data,
-            maybe: response.maybe.data,
-            declined: response.declined.data 
-          }
-          deferred.resolve(angular.extend(response, obj));
+          deferred.resolve(response);
         } else {
           console.log(response ? response.error : null);
           deferred.reject('Unexpected error');
