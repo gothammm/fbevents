@@ -1,13 +1,13 @@
 (function(angular) {
 
-  Events.$inject = ['$scope', '$window', 'EventsService'];
+  Events.$inject = ['$scope', '$window', '$mdToast', 'EventsService'];
 
   angular
     .module('fbevents.modules.events')
     .controller('EventsController', Events);
 
 
-  function Events(scope, ngwindow, eventsService) {
+  function Events(scope, ngwindow, toast, eventsService) {
     
     scope.getEvent = function() {
       var eventId = parseUri(scope.event.url);
@@ -37,6 +37,24 @@
       }
     }
 
+    scope.saveInfo = function() {
+      var data = scope.event.data;
+
+      data.eventId = data.id;
+      delete data.maybe;
+      delete data.id;
+      delete data.attending;
+      delete data.declined;
+
+
+      eventsService.saveInfo(data).then(function(res) {
+        showToastMsg(res.message);
+      })
+      .catch(function(res) {
+        showToastMsg(res.message);
+      })
+    }
+
     scope.getMore = function(type, url) {
       eventsService
       .getMore(url)
@@ -50,6 +68,16 @@
       .catch(function(response) {
         console.log(response);
       })
+    }
+
+
+    function showToastMsg(msg) {
+      toast.show(
+        toast.simple()
+          .content(msg || 'Error!')
+          .position('top right')
+          .hideDelay(3000)
+      );
     }
 
     function parseUri(uri) {

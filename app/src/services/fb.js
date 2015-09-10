@@ -9,6 +9,7 @@
 
   function EventsService(fb, fbToken, q, req) {
 
+    var apiUrl = "http://localhost:9000/api";
 
     function getStatusQuery(type) {
       if(!type) return null;
@@ -34,6 +35,18 @@
     this.getMore = function(nxtUrl) {
       if(!nxtUrl) return q.reject('Invalid request');
       return req.get(nxtUrl);
+    }
+
+    this.saveInfo = function(data) {
+      if(!data) q.reject('Invalid Data');
+      return req
+      .post(apiUrl + '/events', data)
+      .then(function(res) {
+        return q.resolve(res.data || null);
+      })
+      .catch(function(res) {
+        return q.reject(res.data || null);
+      })
     }
 
     this.getDetails = function(eventId) {
